@@ -1,16 +1,37 @@
-# stoppr
+# Stoppr - Sugar Craving Control App
 
-A new Flutter project.
+A Flutter mobile application designed to help users control their sugar cravings and develop healthier eating habits.
+
+## Features (Coming Soon)
+
+- Onboarding experience
+- Track sugar cravings
+- Set personal goals
+- Progress monitoring
+- Tips and strategies
+- Reminders and notifications
+
+## Tech Stack
+
+- Flutter
+- Bloc for state management
+- GoRouter for navigation
+- Freezed for immutable models
+- Flutter Hooks for lifecycle management
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is built with Flutter. To get started:
 
-A few resources to get you started if this is your first Flutter project:
+1. Install Flutter: https://docs.flutter.dev/get-started/install
+2. Clone this repository
+3. Run `flutter pub get`
+4. Run `flutter run`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Contributing
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
