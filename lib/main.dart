@@ -6,6 +6,10 @@ import 'features/welcome/presentation/screens/welcome_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+  
+  // TEMPORARY: Clear SharedPreferences to force welcome screen to appear
+  await prefs.remove('last_opened_date');
+  
   runApp(MyApp(prefs: prefs));
 }
 

@@ -27,7 +27,8 @@ flutter-sim: ## Run Flutter with debug and hot reload, bypassing code signing is
 	@cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO > /dev/null
 	@echo "📱 Installing on simulator..."
 	@xcrun simctl boot "iPhone 16" 2>/dev/null || true
-	@xcrun simctl install "iPhone 16" "$(shell find ~/Library/Developer/Xcode/DerivedData -path "*/Build/Products/Debug-iphonesimulator/Runner.app" -type d | head -n 1)" 2>/dev/null
+	@xcrun simctl install "iPhone 16" "/Users/dave/Library/Developer/Xcode/DerivedData/Runner-hfbvzbfmmnllfxbratyguinviuyb/Build/Products/Debug-iphonesimulator/Runner.app" 2>/dev/null
+	@xcrun simctl launch "iPhone 16" "com.stoppr.app" 2>/dev/null
 	@echo "🔥 Starting Flutter in attach mode for hot reload..."
 	flutter attach --device-id="iPhone 16"
 

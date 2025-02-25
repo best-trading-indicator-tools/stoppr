@@ -7,13 +7,17 @@ class WelcomeManager {
   WelcomeManager(this._prefs);
 
   Future<bool> shouldShowWelcomeScreen() async {
-    final String today = DateTime.now().toIso8601String().split('T')[0];
-    final String? lastOpened = _prefs.getString(_lastOpenedKey);
+    // TEMPORARY: Force welcome screen to appear for testing
+    return true;
     
-    // Update last opened date
-    await _prefs.setString(_lastOpenedKey, today);
+    // Original logic (comment out for testing):
+    // final String today = DateTime.now().toIso8601String().split('T')[0];
+    // final String? lastOpened = _prefs.getString(_lastOpenedKey);
     
-    // Show welcome screen if it's the first time today or no record exists
-    return lastOpened == null || lastOpened != today;
+    // // Update last opened date
+    // await _prefs.setString(_lastOpenedKey, today);
+    
+    // // Show welcome screen if it's the first time today or no record exists
+    // return lastOpened == null || lastOpened != today;
   }
 } 
