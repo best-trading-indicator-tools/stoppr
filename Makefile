@@ -18,6 +18,19 @@ build-release: ## Build the app in release mode
 run: ## Run the app in debug mode
 	flutter run
 
+run-without-sign: ## Run the app in debug mode without signing
+	cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+	xcrun simctl install "iPhone 16" "/Users/dave/Library/Developer/Xcode/DerivedData/Runner-hfbvzbfmmnllfxbratyguinviuyb/Build/Products/Debug-iphonesimulator/Runner.app" && xcrun simctl launch "iPhone 16" "com.stoppr.app"
+
+flutter-sim: ## Run Flutter with debug and hot reload, bypassing code signing issues
+	@echo "🚀 Building app without code signing..."
+	@cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO > /dev/null
+	@echo "📱 Installing on simulator..."
+	@xcrun simctl boot "iPhone 16" 2>/dev/null || true
+	@xcrun simctl install "iPhone 16" "$(shell find ~/Library/Developer/Xcode/DerivedData -path "*/Build/Products/Debug-iphonesimulator/Runner.app" -type d | head -n 1)" 2>/dev/null
+	@echo "🔥 Starting Flutter in attach mode for hot reload..."
+	flutter attach --device-id="iPhone 16"
+
 run-release: ## Run the app in release mode
 	flutter run --release
 
@@ -66,6 +79,7 @@ list-sims: ## List available iOS simulators
 	xcrun simctl list devices
 
 reset: ## Complete reset: clean Flutter, remove derived data, pods, and setup again
+	xcrun simctl shutdown all && xcrun simctl erase all
 	flutter clean
 	rm -rf ~/Library/Developer/Xcode/DerivedData
 	cd ios && rm -rf Pods && rm -f Podfile.lock && cd ..

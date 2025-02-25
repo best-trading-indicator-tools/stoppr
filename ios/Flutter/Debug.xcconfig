@@ -1,2 +1,6 @@
-#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"
+#include "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
+DEVELOPMENT_TEAM=88CVJ6B2HT
+CODE_SIGN_STYLE=Automatic
+CODE_SIGN_IDENTITY=Apple Development
+PROVISIONING_PROFILE_SPECIFIER=
