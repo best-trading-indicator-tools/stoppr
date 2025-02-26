@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
   final VoidCallback onStartQuiz;
@@ -30,7 +31,7 @@ class OnboardingScreen2 extends StatelessWidget {
           // Content
           Column(
             children: [
-              const SizedBox(height: 80), // Add spacing to push content down from top
+              const SizedBox(height: 150), // Increased from 80 to 120 to move content down
               
               // Stoppr title and subtitle
               const Padding(
@@ -42,16 +43,22 @@ class OnboardingScreen2 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'ElzaRound',
                         color: Colors.white,
-                        fontSize: 60,
+                        fontSize: 56.03,
                         fontWeight: FontWeight.bold,
+                        height: 1.0, // 100% line height
+                        letterSpacing: -0.04 * 56.03, // -4% of font size
                       ),
                     ),
                     SizedBox(height: 5),
                     Text(
                       'Quit sugar once and for all',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                        fontFamily: 'ElzaRound',
+                        color: const Color.fromRGBO(255, 255, 255, 0.6),
+                        fontSize: 21.01,
+                        fontWeight: FontWeight.w500, // Medium weight
+                        height: 1.0, // 100% line height
+                        letterSpacing: -0.01 * 21.01, // -1% of font size
                       ),
                     ),
                   ],
@@ -84,9 +91,12 @@ class OnboardingScreen2 extends StatelessWidget {
                       const Text(
                         'Let\'s find out if you have a problem with sugar',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF1A051D), // Dark purple/black
+                          fontFamily: 'ElzaRound',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500, // Medium weight
+                          height: 1.0, // 100% line height
+                          letterSpacing: 0, // 0% letter spacing
+                          color: Color(0xFF181830),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -128,13 +138,10 @@ class OnboardingScreen2 extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // 5 stars
-                          ...List.generate(5, (index) => 
-                            const Icon(
-                              Icons.star, 
-                              color: Color(0xFFFFAA42), // Orange
-                              size: 24,
-                            )
+                          // Stars SVG
+                          SvgPicture.asset(
+                            'assets/images/svg/stars-onboarding-screen-2.svg',
+                            height: 24,
                           ),
                           const SizedBox(width: 8),
                           // Satisfaction text
