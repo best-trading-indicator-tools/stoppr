@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3973100165",
+    "project_id": "stoppr-f2d4a",
+    "storage_bucket": "stoppr-f2d4a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3973100165:android:58f15bb8d47305ee66efec",
+        "android_client_info": {
+          "package_name": "com.stoppr.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYgnifGV_qoGNy8KLZ2XbxVcoSVTtn2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
