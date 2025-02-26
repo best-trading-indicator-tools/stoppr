@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'onboarding_screen.dart';
+import 'onboarding_screen2.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -37,6 +38,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
     }
   }
 
+  void _handleAuth() {
+    // For now, simply navigate to the next screen
+    // In a real implementation, this would handle authentication
+    _navigateToNext();
+  }
+
+  void _handleSkip() {
+    // Navigate directly to home page, skipping the rest of onboarding
+    Navigator.of(context).pushReplacementNamed('/home');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,25 +64,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
               });
             },
             children: [
-              // First screen - Video
+              // First screen - Video with candy
               OnboardingScreen(onComplete: _navigateToNext),
               
-              // Second screen - Placeholder
-              Container(
-                color: Colors.black,
-                child: const Center(
-                  child: Text(
-                    'Onboarding Screen 2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              // Second screen - Stoppr quiz screen
+              OnboardingScreen2(
+                onStartQuiz: _navigateToNext,
               ),
               
-              // Third screen - Placeholder
+              // Third screen - Placeholder (keep this for now)
               Container(
                 color: Colors.black,
                 child: const Center(
@@ -87,21 +89,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ],
           ),
           
-          // Dots indicator
-          Container(
-            alignment: const Alignment(0, 0.85),
-            child: SmoothPageIndicator(
-              controller: _controller,
-              count: 3,
-              effect: const ExpandingDotsEffect(
-                spacing: 8,
-                dotWidth: 8,
-                dotHeight: 8,
-                dotColor: Colors.white38,
-                activeDotColor: Colors.white,
+          // Dots indicator - only show on first screen
+          if (_currentPage == 0)
+            Container(
+              alignment: const Alignment(0, 0.85),
+              child: SmoothPageIndicator(
+                controller: _controller,
+                count: 3,
+                effect: const ExpandingDotsEffect(
+                  spacing: 8,
+                  dotWidth: 8,
+                  dotHeight: 8,
+                  dotColor: Colors.white38,
+                  activeDotColor: Colors.white,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
