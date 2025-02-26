@@ -68,12 +68,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                 ),
-                // Playstore image overlay positioned where the sun is
+                // Candy image overlay with responsive positioning and sizing
                 Positioned(
-                  right: -30,
-                  bottom: MediaQuery.of(context).size.height * 0.22, // Adjusted to find a middle ground between too high and too low
-                  width: 200, // Doubled from 100 to 200 to make it twice bigger
-                  height: 200, // Doubled from 100 to 200 to make it twice bigger
+                  right: MediaQuery.of(context).size.width * -0.08, // Responsive right position
+                  bottom: MediaQuery.of(context).size.height * 0.22, // Keep the same vertical position
+                  width: MediaQuery.of(context).size.width * 0.5, // Responsive width (50% of screen width)
+                  height: MediaQuery.of(context).size.width * 0.5, // Keep aspect ratio square based on width
                   child: Image.asset(
                     'assets/images/onboarding/candy.png',
                     fit: BoxFit.contain,
