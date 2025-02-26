@@ -18,7 +18,7 @@ class OnboardingScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final cakeSize = screenSize.width * 0.77;
+    final cakeSize = screenSize.width * 0.78;
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,17 +67,17 @@ class OnboardingScreen3 extends StatelessWidget {
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1A051D),
-                          letterSpacing: -0.02 * 28,
+                          letterSpacing: -0.02 * 25,
                         ),
                       ),
                       SizedBox(height: screenSize.height * 0.03),
-                      SizedBox(
-                        width: double.infinity,
+                      Container(
+                        width: screenSize.width * 0.85,
                         height: 56,
                         child: OutlinedButton(
                           onPressed: onContinueWithApple,
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFF1A051D), width: 1.0),
+                            side: const BorderSide(color: Color(0xFF1A051D), width: 2),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
@@ -89,7 +89,7 @@ class OnboardingScreen3 extends StatelessWidget {
                               const Icon(
                                 Icons.apple,
                                 color: Colors.black,
-                                size: 20,
+                                size: 25,
                               ),
                               const SizedBox(width: 8),
                               const Text(
@@ -105,13 +105,13 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
+                      Container(
+                        width: screenSize.width * 0.85,
                         height: 56,
                         child: OutlinedButton(
                           onPressed: onContinueWithGoogle,
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFF1A051D), width: 1.0),
+                            side: const BorderSide(color: Color(0xFF1A051D), width: 2),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
@@ -122,8 +122,8 @@ class OnboardingScreen3 extends StatelessWidget {
                             children: [
                               SvgPicture.asset(
                                 'assets/images/icons/google_g_logo.svg',
-                                width: 20,
-                                height: 20,
+                                width: 25,
+                                height: 25,
                               ),
                               const SizedBox(width: 8),
                               const Text(
@@ -139,13 +139,13 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
+                      Container(
+                        width: screenSize.width * 0.85,
                         height: 56,
                         child: OutlinedButton(
                           onPressed: onContinueWithEmail,
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFF1A051D), width: 1.0),
+                            side: const BorderSide(color: Color(0xFF1A051D), width: 2),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
@@ -157,7 +157,7 @@ class OnboardingScreen3 extends StatelessWidget {
                               const Icon(
                                 Icons.email_outlined,
                                 color: Color(0xFF1A051D),
-                                size: 20,
+                                size: 25,
                               ),
                               const SizedBox(width: 8),
                               const Text(
@@ -174,7 +174,7 @@ class OnboardingScreen3 extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                       SizedBox(
-                        width: double.infinity,
+                        width: screenSize.width * 0.85,
                         height: 56,
                         child: ElevatedButton(
                           onPressed: onSkip,
@@ -193,8 +193,9 @@ class OnboardingScreen3 extends StatelessWidget {
                                 'Skip for now',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  fontFamily: 'ElzaRound',
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -216,6 +217,7 @@ class OnboardingScreen3 extends StatelessWidget {
                             style: TextStyle(
                               color: Color(0xFF666666),
                               fontSize: 13,
+                              fontFamily: 'ElzaRound',
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -226,6 +228,7 @@ class OnboardingScreen3 extends StatelessWidget {
                               style: TextStyle(
                                 color: Color(0xFF3A1355),
                                 fontSize: 13,
+                                fontFamily: 'ElzaRound',
                                 fontWeight: FontWeight.w500,
                                 decoration: TextDecoration.underline,
                               ),
