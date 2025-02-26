@@ -40,8 +40,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _handleAppleSignIn() {
-    // TODO: Implement Apple Sign In
-    print('Apple Sign In tapped');
+    context.read<AuthCubit>().signInWithApple();
   }
 
   void _handleGoogleSignIn() {

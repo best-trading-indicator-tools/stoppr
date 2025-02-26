@@ -34,6 +34,19 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  // Sign in with Apple
+  Future<void> signInWithApple() async {
+    emit(const AuthState.loading());
+    
+    final result = await _authService.signInWithApple();
+    
+    if (result.isSuccess && result.user != null) {
+      emit(AuthState.authenticated(result.user!));
+    } else {
+      emit(AuthState.error(result.errorMessage ?? 'Unknown error occurred'));
+    }
+  }
+
   // Sign out
   Future<void> signOut() async {
     emit(const AuthState.loading());
