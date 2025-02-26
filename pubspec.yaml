@@ -92,12 +92,38 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: ElzaRound
+      fonts:
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Semibold.ttf
+          weight: 600
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-MedIta.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Elza Round/ElzaRoundVariable-SemBdIta.ttf
+          weight: 600
+          style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
