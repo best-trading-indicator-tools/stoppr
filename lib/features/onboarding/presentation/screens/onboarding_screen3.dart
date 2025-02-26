@@ -121,7 +121,7 @@ class OnboardingScreen3 extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'assets/images/icons/google_g_logo.svg',
+                                'assets/images/svg/google_g_logo.svg',
                                 width: 25,
                                 height: 25,
                               ),
