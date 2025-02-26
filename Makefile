@@ -8,6 +8,7 @@ help: ## Show this help
 clean: ## Clean the project
 	cd ios && rm -rf Pods Podfile.lock
 	pod install --repo-update
+	cd ..
 	flutter clean
 	flutter pub get
 

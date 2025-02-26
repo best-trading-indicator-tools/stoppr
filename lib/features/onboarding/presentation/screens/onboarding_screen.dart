@@ -70,10 +70,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 // Playstore image overlay positioned where the sun is
                 Positioned(
-                  right: 10,
+                  right: -30,
                   bottom: MediaQuery.of(context).size.height * 0.22, // Adjusted to find a middle ground between too high and too low
-                  width: 100, // Adjust size as needed
-                  height: 100, // Adjust size as needed
+                  width: 200, // Doubled from 100 to 200 to make it twice bigger
+                  height: 200, // Doubled from 100 to 200 to make it twice bigger
                   child: Image.asset(
                     'assets/images/onboarding/candy.png',
                     fit: BoxFit.contain,
