@@ -15,12 +15,14 @@ class OnboardingScreen2 extends StatelessWidget {
       body: Stack(
         children: [
           // Background gradient image with sunset
-          Image.asset(
-            'assets/images/onboarding/onboarding-screen2.png',
-            fit: BoxFit.fitHeight,
-            width: double.infinity,
-            height: double.infinity,
-            alignment: Alignment.center,
+          Container(
+            color: const Color(0xFFF97777),
+            child: Image.asset(
+              'assets/images/onboarding/sun-image-background.png',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
           ),
           
           // Content
