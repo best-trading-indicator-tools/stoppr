@@ -18,33 +18,43 @@ class OnboardingScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final cakeSize = screenSize.width * 0.77; // Adjust cake size to be 50% of screen width
+    final cakeSize = screenSize.width * 0.77;
     
     return Scaffold(
-      backgroundColor: const Color(0xFFFFD5D6),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: screenSize.height * 0.03),
-              // Cake Image
-              Image.asset(
-                'assets/images/onboarding/cake-onboarding-screen-3.png',
-                width: cakeSize,
-                height: cakeSize,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(height: 16),
-              // White Container with Buttons
-              Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Container(
+            color: const Color(0xFFFFD5D6),
+            width: double.infinity,
+            child: SafeArea(
+              bottom: false,
+              child: Column(
+                children: [
+                  SizedBox(height: screenSize.height * 0.03),
+                  Image.asset(
+                    'assets/images/onboarding/cake-onboarding-screen-3.png',
+                    width: cakeSize,
+                    height: cakeSize,
+                    fit: BoxFit.contain,
                   ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+          
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                  topRight: Radius.circular(32),
                 ),
+              ),
+              child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
                   child: Column(
@@ -61,7 +71,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: screenSize.height * 0.03),
-                      // Apple Sign In Button
                       SizedBox(
                         width: double.infinity,
                         height: 56,
@@ -96,7 +105,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // Google Sign In Button
                       SizedBox(
                         width: double.infinity,
                         height: 56,
@@ -131,7 +139,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // Email Sign In Button
                       SizedBox(
                         width: double.infinity,
                         height: 56,
@@ -166,7 +173,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      // Skip Button - Purple with arrow
                       SizedBox(
                         width: double.infinity,
                         height: 56,
@@ -202,7 +208,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // Want to skip this step? text
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -233,9 +238,9 @@ class OnboardingScreen3 extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
