@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   final VoidCallback? onContinueWithApple;
@@ -16,23 +17,26 @@ class OnboardingScreen3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final cakeSize = screenSize.width * 0.77; // Adjust cake size to be 50% of screen width
+    
     return Scaffold(
       backgroundColor: const Color(0xFFFFD5D6),
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            // Cake Image
-            Image.asset(
-              'assets/images/onboarding/cake-onboarding-screen-3.png',
-              width: MediaQuery.of(context).size.width * 0.45,
-              height: MediaQuery.of(context).size.width * 0.45,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 16),
-            // White Container with Buttons
-            Expanded(
-              child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: screenSize.height * 0.03),
+              // Cake Image
+              Image.asset(
+                'assets/images/onboarding/cake-onboarding-screen-3.png',
+                width: cakeSize,
+                height: cakeSize,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 16),
+              // White Container with Buttons
+              Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -42,23 +46,21 @@ class OnboardingScreen3 extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 24),
                       const Text(
                         'Become a Stoppr',
                         style: TextStyle(
                           fontFamily: 'ElzaRound',
-                          fontSize: 28,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1A051D),
                           letterSpacing: -0.02 * 28,
                         ),
                       ),
-                      const SizedBox(height: 28),
+                      SizedBox(height: screenSize.height * 0.03),
                       // Apple Sign In Button
                       SizedBox(
                         width: double.infinity,
@@ -93,7 +95,7 @@ class OnboardingScreen3 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
                       // Google Sign In Button
                       SizedBox(
                         width: double.infinity,
@@ -110,18 +112,10 @@ class OnboardingScreen3 extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
+                              SvgPicture.asset(
+                                'assets/images/icons/google_g_logo.svg',
                                 width: 20,
                                 height: 20,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  'G',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
                               ),
                               const SizedBox(width: 8),
                               const Text(
@@ -136,7 +130,7 @@ class OnboardingScreen3 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
                       // Email Sign In Button
                       SizedBox(
                         width: double.infinity,
@@ -171,22 +165,20 @@ class OnboardingScreen3 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Spacer(),
+                      const SizedBox(height: 24),
                       // Skip Button - Purple with arrow
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: 56,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF3A1355),
-                          borderRadius: BorderRadius.circular(28),
-                        ),
-                        child: TextButton(
+                        child: ElevatedButton(
                           onPressed: onSkip,
-                          style: TextButton.styleFrom(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF3A1355),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -199,18 +191,18 @@ class OnboardingScreen3 extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(width: 8),
+                              const SizedBox(width: 10),
                               const Icon(
                                 Icons.arrow_forward,
                                 color: Colors.white,
-                                size: 16,
+                                size: 18,
                               ),
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      // Skip hint text
+                      const SizedBox(height: 16),
+                      // Want to skip this step? text
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -236,13 +228,13 @@ class OnboardingScreen3 extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 16),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
