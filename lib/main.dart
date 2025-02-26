@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      routes: {
+        '/home': (context) => const HomePage(),
+      },
       home: FutureBuilder<bool>(
         future: WelcomeManager(prefs).shouldShowWelcomeScreen(),
         builder: (context, snapshot) {
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
             return const WelcomeScreen();
           }
           
-          return const HomePage(); // You'll need to create this
+          return const HomePage();
         },
       ),
     );
@@ -50,9 +53,33 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
-        child: Text('Home Page'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Home Page',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Reset preferences and restart app flow for testing
+                SharedPreferences.getInstance().then((prefs) {
+                  prefs.remove('last_opened_date');
+                  Navigator.of(context).pushReplacementNamed('/');
+                });
+              },
+              child: const Text('Restart App Flow'),
+            ),
+          ],
+        ),
       ),
     );
   }
