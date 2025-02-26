@@ -229,8 +229,7 @@ class OnboardingScreen3 extends StatelessWidget {
                                 color: Color(0xFF3A1355),
                                 fontSize: 13,
                                 fontFamily: 'ElzaRound',
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w500
                               ),
                             ),
                           ),
