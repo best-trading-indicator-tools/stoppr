@@ -117,16 +117,23 @@ class OnboardingScreen2 extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 'Start Quiz',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 8),
-                              Icon(Icons.arrow_forward_ios, size: 16),
+                              const SizedBox(width: 8),
+                              SvgPicture.asset(
+                                'assets/images/svg/start-quiz-arrow.svg',
+                                height: 16,
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -141,17 +148,35 @@ class OnboardingScreen2 extends StatelessWidget {
                           // Stars SVG
                           SvgPicture.asset(
                             'assets/images/svg/stars-onboarding-screen-2.svg',
-                            height: 24,
+                            height: 16,
                           ),
                           const SizedBox(width: 8),
                           // Satisfaction text
-                          const Text(
-                            '98% Satisfaction',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF1A051D),
-                            ),
+                          Row(
+                            children: const [
+                              Text(
+                                '98%',
+                                style: TextStyle(
+                                  fontFamily: 'ElzaRound',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.0, // 100% line height
+                                  letterSpacing: -0.01 * 13, // -1% of font size
+                                  color: Color(0xFF1A051D),
+                                ),
+                              ),
+                              Text(
+                                ' Satisfaction',
+                                style: TextStyle(
+                                  fontFamily: 'ElzaRound',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500, // Medium
+                                  height: 1.0, // 100% line height
+                                  letterSpacing: -0.01 * 13, // -1% of font size
+                                  color: Color(0xFF1A051D),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
