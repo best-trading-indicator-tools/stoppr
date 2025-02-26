@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'onboarding_screen.dart';
 import 'onboarding_screen2.dart';
+import 'onboarding_screen3.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -32,16 +33,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-    } else {
-      // Navigate to home page when completed
-      Navigator.of(context).pushReplacementNamed('/home');
     }
   }
 
-  void _handleAuth() {
-    // For now, simply navigate to the next screen
-    // In a real implementation, this would handle authentication
-    _navigateToNext();
+  void _handleAppleSignIn() {
+    // TODO: Implement Apple Sign In
+    print('Apple Sign In tapped');
+  }
+
+  void _handleGoogleSignIn() {
+    // TODO: Implement Google Sign In
+    print('Google Sign In tapped');
+  }
+
+  void _handleEmailSignIn() {
+    // TODO: Implement Email Sign In
+    print('Email Sign In tapped');
   }
 
   void _handleSkip() {
@@ -72,24 +79,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onStartQuiz: _navigateToNext,
               ),
               
-              // Third screen - Placeholder (keep this for now)
-              Container(
-                color: Colors.black,
-                child: const Center(
-                  child: Text(
-                    'Onboarding Screen 3',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              // Third screen - Authentication options
+              OnboardingScreen3(
+                onContinueWithApple: _handleAppleSignIn,
+                onContinueWithGoogle: _handleGoogleSignIn,
+                onContinueWithEmail: _handleEmailSignIn,
+                onSkip: _handleSkip,
               ),
             ],
           ),
-          
-          // Removed the SmoothPageIndicator for the first screen
         ],
       ),
     );

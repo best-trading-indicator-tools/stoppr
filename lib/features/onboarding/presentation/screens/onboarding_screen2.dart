@@ -81,8 +81,8 @@ class OnboardingScreen2 extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     left: 24.0,
                     right: 24.0,
-                    top: 40.0,
-                    bottom: 40.0,
+                    top: 24.0,
+                    bottom: 24.0,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +100,7 @@ class OnboardingScreen2 extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 24),
                       
                       // Start Quiz button
                       SizedBox(
