@@ -17,16 +17,17 @@ class OnboardingScreen2 extends StatelessWidget {
           // Background gradient image with sunset
           Image.asset(
             'assets/images/onboarding/onboarding-screen2.png',
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
             width: double.infinity,
             height: double.infinity,
+            alignment: Alignment.center,
           ),
           
           // Content
           SafeArea(
             child: Column(
               children: [
-                const Spacer(flex: 2),
+                const Spacer(flex: 1),
                 
                 // Stoppr title and subtitle
                 const Padding(
@@ -66,12 +67,15 @@ class OnboardingScreen2 extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.only(
+                      left: 24.0,
+                      right: 24.0,
+                      top: 40.0,
+                      bottom: 40.0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 24),
-                        
                         // Text at the top of the card
                         const Text(
                           'Let\'s find out if you have a problem with sugar',
@@ -82,7 +86,7 @@ class OnboardingScreen2 extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 40),
                         
                         // Start Quiz button
                         SizedBox(
