@@ -6,8 +6,10 @@ class WelcomeManager {
 
   WelcomeManager(this._prefs);
 
+  // Determines whether to show the onboarding flow
+  // We've kept the method name the same for now to avoid breaking existing code
   Future<bool> shouldShowWelcomeScreen() async {
-    // TEMPORARY: Force welcome screen to appear for testing
+    // TEMPORARY: Force onboarding to appear for testing
     return true;
     
     // Original logic (comment out for testing):
@@ -17,7 +19,7 @@ class WelcomeManager {
     // // Update last opened date
     // await _prefs.setString(_lastOpenedKey, today);
     
-    // // Show welcome screen if it's the first time today or no record exists
+    // // Show onboarding flow if it's the first time today or no record exists
     // return lastOpened == null || lastOpened != today;
   }
 } 

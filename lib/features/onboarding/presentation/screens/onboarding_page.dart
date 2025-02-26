@@ -89,22 +89,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ],
           ),
           
-          // Dots indicator - only show on first screen
-          if (_currentPage == 0)
-            Container(
-              alignment: const Alignment(0, 0.85),
-              child: SmoothPageIndicator(
-                controller: _controller,
-                count: 3,
-                effect: const ExpandingDotsEffect(
-                  spacing: 8,
-                  dotWidth: 8,
-                  dotHeight: 8,
-                  dotColor: Colors.white38,
-                  activeDotColor: Colors.white,
-                ),
-              ),
-            ),
+          // Removed the SmoothPageIndicator for the first screen
         ],
       ),
     );

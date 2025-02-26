@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'features/welcome/application/welcome_manager.dart';
-import 'features/welcome/presentation/screens/welcome_screen.dart';
+import 'features/onboarding/presentation/screens/onboarding_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   
-  // TEMPORARY: Clear SharedPreferences to force welcome screen to appear
-  await prefs.remove('last_opened_date');
+  // No longer needed to clear preferences since we're directly showing onboarding
   
   runApp(MyApp(prefs: prefs));
 }
@@ -29,20 +27,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomePage(),
       },
-      home: FutureBuilder<bool>(
-        future: WelcomeManager(prefs).shouldShowWelcomeScreen(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SizedBox.shrink();
-          }
-          
-          if (snapshot.data == true) {
-            return const WelcomeScreen();
-          }
-          
-          return const HomePage();
-        },
-      ),
+      // Directly using OnboardingPage as the initial screen
+      home: const OnboardingPage(),
     );
   }
 }
