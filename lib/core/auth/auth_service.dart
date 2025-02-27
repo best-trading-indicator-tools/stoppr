@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 import 'models/app_user.dart';
 
@@ -117,13 +118,24 @@ class AuthService {
       
       return AuthResult(errorMessage: 'Failed to sign in with Apple');
     } catch (e) {
-      // Handle specific sign in with apple errors
-      if (e.toString().contains('AuthorizationErrorCode.canceled') ||
-          e.toString().contains('The operation couldn't be completed')) {
-        return AuthResult(errorMessage: 'Sign in cancelled');
+      // Simply return without error for any kind of cancellation or popup closing
+      if (e is SignInWithAppleAuthorizationException && e.code == AuthorizationErrorCode.canceled) {
+        return AuthResult();
       }
       
-      return AuthResult(errorMessage: 'Apple sign in error: ${e.toString()}');
+      // Also catch the iOS native cancellation
+      if (e.toString().contains("The operation couldn't be completed")) {
+        return AuthResult();
+      }
+      
+      // Only show errors for actual failures
+      if (e is FirebaseAuthException) {
+        return AuthResult(errorMessage: _getReadableAuthError(e));
+      }
+      
+      // Log the error for debugging but don't show to user
+      debugPrint('Apple sign in error: ${e.toString()}');
+      return AuthResult();
     }
   }
 
