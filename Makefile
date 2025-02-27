@@ -5,32 +5,8 @@ help: ## Show this help
 	@echo "Available commands:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-clean-fast: ## Quick clean without pod reinstall
-	@echo "🧹 Removing build artifacts..."
-	cd ios && rm -rf Pods Podfile.lock DerivedData && cd .. && \
-	flutter clean && \
-	rm -f ".flutter-plugins 2" ".flutter-plugins 3" ".flutter-plugins 4" ".flutter-plugins-dependencies 2" ".flutter-plugins-dependencies 3" ".flutter-plugins-dependencies 4" && \
-	flutter pub get
-	@echo "✅ Fast clean completed successfully!"
-
-clean-pods: ## Clean and reinstall pods
-	@echo "🧩 Cleaning pods..."
-	cd ios && pod deintegrate && \
-	echo "🔄 Installing pods (this may take a while)..." && \
-	pod install --repo-update
-	@echo "🔗 Creating symbolic links for Firebase plugins..."
-	@echo "✅ Pod clean and install completed successfully!"
-
-flutter-clean: ## Run flutter clean only
-	@echo "🧹 Cleaning Flutter build artifacts..."
-	flutter clean
-	@echo "✅ Flutter clean completed!"
-
-clean: ## Full clean including pods (may take a while)
-	@echo "🧹 Starting complete clean process..."
-	@make clean-fast
-	@make clean-pods
-	@echo "✅ Clean process completed successfully!"
+clean:
+	flutter pub get && flutter clean && cd ios && rm -rf Pods Podfile.lock .symlinks && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install --repo-update
 
 build: ## Build the app in debug mode
 	flutter build ios --debug
@@ -47,7 +23,7 @@ run-without-sign: ## Run the app in debug mode without signing
 
 flutter-sim: ## Run Flutter with debug and hot reload, bypassing code signing issues
 	@echo "🚀 Building app without code signing..."
-	@cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO > /dev/null
+	@cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator > /dev/null
 	@echo "📱 Installing on simulator..."
 	@xcrun simctl boot "iPhone 16" 2>/dev/null || true
 	@xcrun simctl install "iPhone 16" "/Users/dave/Library/Developer/Xcode/DerivedData/Runner-hfbvzbfmmnllfxbratyguinviuyb/Build/Products/Debug-iphonesimulator/Runner.app" 2>/dev/null
@@ -57,7 +33,7 @@ flutter-sim: ## Run Flutter with debug and hot reload, bypassing code signing is
 
 flutter-sim-debug: ## Run Flutter with debug, verbose output and hot reload, bypassing code signing issues
 	@echo "🔍 Building app without code signing (VERBOSE MODE)..."
-	cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+	cd ios && xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Debug -sdk iphonesimulator  > /dev/null
 	@echo "📱 Installing on simulator (VERBOSE MODE)..."
 	xcrun simctl boot "iPhone 16" || true
 	xcrun simctl install "iPhone 16" "/Users/dave/Library/Developer/Xcode/DerivedData/Runner-hfbvzbfmmnllfxbratyguinviuyb/Build/Products/Debug-iphonesimulator/Runner.app" 
@@ -114,7 +90,7 @@ list-sims: ## List available iOS simulators
 
 reset: ## Complete reset: clean Flutter, remove derived data, pods, and setup again
 	@echo "🧹 Starting complete reset..."
-	flutter clean
+	flutter pub get && flutter clean
 	rm -f ".flutter-plugins 2" ".flutter-plugins 3" ".flutter-plugins 4" ".flutter-plugins-dependencies 2" ".flutter-plugins-dependencies 3" ".flutter-plugins-dependencies 4"
 	rm -rf ~/Library/Developer/Xcode/DerivedData
 	cd ios && rm -rf Pods && rm -f Podfile.lock && pod deintegrate && pod cache clean --all && cd ..
@@ -122,3 +98,12 @@ reset: ## Complete reset: clean Flutter, remove derived data, pods, and setup ag
 	cd ios && pod install --repo-update && cd ..
 	xcrun simctl shutdown all && xcrun simctl erase all
 	@echo "🧹 Reset complete! Project is fresh and clean."
+
+release: ## Build the app in release mode
+	flutter pub get && flutter clean && cd ios && rm -rf Pods Podfile.lock .symlinks && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install --repo-update && flutter build ios --release --verbose
+
+xcodebuild: ## Build the app in release mode
+	xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -sdk iphoneos -allowProvisioningUpdates
+
+ipafile: ## Create an IPA file
+	cxcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist exportOptions.plist -exportPath build/Runner.ipa
