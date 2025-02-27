@@ -74,6 +74,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
             Navigator.of(context).pushReplacementNamed('/home');
           },
           error: (message) {
+            // Show error message with user-friendly handling
+            String displayMessage = message;
+            
+            // Convert technical errors to user-friendly messages
+            if (message == 'Sign in cancelled') {
+              // Don't show any error for user-initiated cancellation
+              return;
+            } else if (message.contains('network')) {
+              displayMessage = 'Please check your internet connection and try again';
+            }
+            
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -86,7 +97,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     children: [
                       TextSpan(
-                        text: message,
+                        text: displayMessage,
                         style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Colors.white,

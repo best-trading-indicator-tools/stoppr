@@ -117,6 +117,12 @@ class AuthService {
       
       return AuthResult(errorMessage: 'Failed to sign in with Apple');
     } catch (e) {
+      // Handle specific sign in with apple errors
+      if (e.toString().contains('AuthorizationErrorCode.canceled') ||
+          e.toString().contains('The operation couldn't be completed')) {
+        return AuthResult(errorMessage: 'Sign in cancelled');
+      }
+      
       return AuthResult(errorMessage: 'Apple sign in error: ${e.toString()}');
     }
   }

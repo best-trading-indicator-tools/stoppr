@@ -152,7 +152,7 @@ deep-clean: ## Thoroughly remove ALL pod and cache files, including duplicates
 	rm -rf *.xcworkspace && \
 	rm -rf Pods && \
 	rm -rf "Pods 2" "Pods 3" "Pods 4" 2>/dev/null || true && \
-	rm -f Podfile.lock && \
+	rm -rf Podfile.lock && \
 	echo "Step 7: Running pod deintegrate..." && \
 	pod deintegrate || true && \
 	echo "Step 8: Cleaning pod cache..." && \
