@@ -1,13 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../models/app_user.dart';
 
 part 'auth_state.freezed.dart';
 
 @freezed
 class AuthState with _$AuthState {
-  const factory AuthState.initial() = _Initial;
-  const factory AuthState.loading() = _Loading;
-  const factory AuthState.authenticated(User user) = _Authenticated;
-  const factory AuthState.unauthenticated() = _Unauthenticated;
-  const factory AuthState.error(String message) = _Error;
+  // Initial state
+  const factory AuthState.initial() = Initial;
+
+  // Loading state (during auth operations)
+  const factory AuthState.loading() = Loading;
+
+  // User is authenticated
+  const factory AuthState.authenticated(AppUser user) = Authenticated;
+
+  // User is not authenticated
+  const factory AuthState.unauthenticated() = Unauthenticated;
+
+  // Error state
+  const factory AuthState.error(String message) = Error;
 } 

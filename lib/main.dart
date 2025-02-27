@@ -1,37 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'core/auth/auth_service.dart';
 import 'core/auth/cubit/auth_cubit.dart';
 import 'features/onboarding/presentation/screens/onboarding_page.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Initialize Firebase with the DefaultFirebaseOptions
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Failed to initialize Firebase: $e');
+  }
   
   final prefs = await SharedPreferences.getInstance();
+  final authService = AuthService();
   
-  // No longer needed to clear preferences since we're directly showing onboarding
-  
-  runApp(MyApp(prefs: prefs));
+  runApp(MyApp(
+    prefs: prefs,
+    authService: authService,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final SharedPreferences prefs;
-  final AuthService _authService = AuthService();
+  final AuthService authService;
   
-  MyApp({super.key, required this.prefs});
+  MyApp({
+    super.key, 
+    required this.prefs,
+    required this.authService,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(authService: _authService),
+      create: (context) => AuthCubit(authService: authService),
       child: MaterialApp(
         title: 'Stoppr',
         theme: ThemeData(
@@ -71,15 +82,13 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Sign out
-                context.read<AuthCubit>().signOut();
                 // Reset preferences and restart app flow for testing
                 SharedPreferences.getInstance().then((prefs) {
                   prefs.remove('last_opened_date');
                   Navigator.of(context).pushReplacementNamed('/');
                 });
               },
-              child: const Text('Sign Out & Restart App Flow'),
+              child: const Text('Restart App Flow'),
             ),
           ],
         ),

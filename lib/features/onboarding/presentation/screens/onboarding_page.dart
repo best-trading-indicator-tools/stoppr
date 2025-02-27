@@ -49,7 +49,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   void _handleEmailSignIn() {
     // TODO: Implement Email Sign In
-    print('Email Sign In tapped');
+    print('Email Sign In tapped - will implement with Firebase');
   }
 
   void _handleSkip() {
