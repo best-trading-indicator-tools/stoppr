@@ -8,6 +8,7 @@ import '../../../../core/auth/cubit/auth_state.dart';
 import 'onboarding_screen.dart';
 import 'onboarding_screen2.dart';
 import 'onboarding_screen3.dart';
+import '../../../../features/auth/presentation/screens/email_auth_screen.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -48,8 +49,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _handleEmailSignIn() {
-    // TODO: Implement Email Sign In
-    print('Email Sign In tapped - will implement with Firebase');
+    // Navigate to the email authentication screen
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EmailAuthScreen(
+          onBackPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+    );
   }
 
   void _handleSkip() {
