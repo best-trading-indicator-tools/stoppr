@@ -113,53 +113,12 @@ list-sims: ## List available iOS simulators
 	xcrun simctl list devices
 
 reset: ## Complete reset: clean Flutter, remove derived data, pods, and setup again
-	xcrun simctl shutdown all && xcrun simctl erase all
+	@echo "🧹 Starting complete reset..."
 	flutter clean
 	rm -f ".flutter-plugins 2" ".flutter-plugins 3" ".flutter-plugins 4" ".flutter-plugins-dependencies 2" ".flutter-plugins-dependencies 3" ".flutter-plugins-dependencies 4"
 	rm -rf ~/Library/Developer/Xcode/DerivedData
-	cd ios && rm -rf Pods && rm -f Podfile.lock && cd ..
+	cd ios && rm -rf Pods && rm -f Podfile.lock && pod deintegrate && pod cache clean --all && cd ..
 	flutter pub get
-	cd ios && pod deintegrate && pod cache clean --all && pod install --repo-update && cd ..
+	cd ios && pod install --repo-update && cd ..
+	xcrun simctl shutdown all && xcrun simctl erase all
 	@echo "🧹 Reset complete! Project is fresh and clean."
-
-clean-pods-reset:
-	@echo "🧹 Cleaning and completely resetting all pod dependencies..."
-	cd ios && \
-	rm -rf Pods Podfile.lock && \
-	pod deintegrate && \
-	pod cache clean --all && \
-	pod install --repo-update && \
-	echo "Creating symbolic links for firebase_auth..." && \
-	mkdir -p Pods/firebase_auth && \
-	echo "Done! ✅"
-
-deep-clean: ## Thoroughly remove ALL pod and cache files, including duplicates
-	@echo "🧹 Performing deep clean of all pod files and duplicates..."
-	@echo "Step 1: Shutting down simulators..."
-	xcrun simctl shutdown all 2>/dev/null || true
-	@echo "Step 2: Cleaning Flutter artifacts..."
-	flutter clean
-	@echo "Step 3: Removing duplicate plugin files..."
-	rm -f ".flutter-plugins 2" ".flutter-plugins 3" ".flutter-plugins 4"
-	rm -f ".flutter-plugins-dependencies 2" ".flutter-plugins-dependencies 3" ".flutter-plugins-dependencies 4"
-	@echo "Step 4: Cleaning Xcode artifacts..."
-	rm -rf ~/Library/Developer/Xcode/DerivedData/*Runner*
-	@echo "Step 5: Cleaning CocoaPods cache..."
-	rm -rf ~/Library/Caches/CocoaPods
-	@echo "Step 6: Removing iOS build artifacts..."
-	cd ios && \
-	rm -rf Runner.xcworkspace && \
-	rm -rf *.xcworkspace && \
-	rm -rf Pods && \
-	rm -rf "Pods 2" "Pods 3" "Pods 4" 2>/dev/null || true && \
-	rm -rf Podfile.lock && \
-	echo "Step 7: Running pod deintegrate..." && \
-	pod deintegrate || true && \
-	echo "Step 8: Cleaning pod cache..." && \
-	pod cache clean --all || true && \
-	cd ..
-	@echo "Step 9: Getting Flutter dependencies..."
-	flutter pub get
-	@echo "Step 10: Reinstalling pods..."
-	cd ios && pod install --repo-update
-	@echo "✅ Deep clean completed successfully! All duplicates removed."
